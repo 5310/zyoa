@@ -1,3 +1,12 @@
+jQuery.fn.outerHTML = function() {
+    var s = $(this).clone().wrap('<div>').parent().html();
+    return s;
+};
+
+jQuery.fn.appendAll= function(s) {
+    $(this).append(s.outerHTML());
+};
+
 jQuery.fn.tag = function() {
     return $(this).get(0).tagName;
 };
@@ -58,6 +67,7 @@ var jump = function(id) {
 };
 
 var display = function() {
+    $('#zyoa').appendAll(node);
     console.log(node.html());
 };
 
