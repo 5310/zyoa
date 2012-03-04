@@ -67,8 +67,11 @@ var jump = function(id) {
 };
 
 var display = function() {
-    $('#zyoa').appendAll(node);
-    console.log(node.html());
+    var data = node.outerHTML();
+    var regex = new RegExp("(id=[\"|\']\s*[^\"|^\']*?\s*[\"|\'])", 'g');
+    data = data.replace(regex, '');
+    $('#zyoa').append(data);
+    console.log(data);
 };
 
 var evaluate = function() {
