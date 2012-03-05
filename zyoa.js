@@ -1,3 +1,5 @@
+// ### Some jQuery extensions.
+
 jQuery.fn.outerHTML = function() {
     var s = $(this).clone().wrap('<div>').parent().html();
     return s;
@@ -11,10 +13,15 @@ jQuery.fn.tag = function() {
     return $(this).get(0).tagName;
 };
 
-var node, done = true;
 
-var clicktomove = true, interactive = false;
 
+// ### Lowish level tree traversal functions. ZYOA specific, though.
+
+// The active node inside the tree. Always a leaf.
+var node;
+
+// Moves to the bottom-most node, traversing through `section` elements. 
+// All else is considered leaves.
 var down = function() {
     if (node.tag() == 'SECTION' || node.tag() == 'ARTICLE') {
         node = node.children().first();
@@ -27,6 +34,7 @@ var down = function() {
     }
 };
 
+// Moves up the tree to the next leaf-node, but not over the root `article` element.
 var up = function() {
     if (node.tag() != 'ARTICLE') {
         node = node.parent();
@@ -36,6 +44,7 @@ var up = function() {
     }
 };
 
+// Moves to the next leaf-node, if there is any, and not beyond the root `article` tag.
 var next = function() {
     if (node.tag() == 'ARTICLE')
         return false;
@@ -47,6 +56,9 @@ var next = function() {
     }
 };
 
+// ### Internal story-tree functions.
+
+//Iterates through the story-tree, finding one element after another.
 var iterate = function() {
     if (next()) {
         return down();
@@ -59,15 +71,25 @@ var iterate = function() {
     }
 };
 
-var jump = function(id) {
-    node = $(id);
-    if (down()) {
-        display();
-        done = false;
-        return true;    
+// Evaluates what to do with the current element.
+var evaluate = function() {
+    if (node.tag() == 'SCRIPT') {
+        // Yes, I know, "the `Function` constructor is `eval`, and therefore, _evil_." Deal with it.
+        var temporary_function = new Function(node.html());
+        temporary_function();
+    } else {
+        if (node.hasClass("skip"))
+            move();
+        else
+            display();
+        if (node.hasClass("stop"))
+            stop = true;
+        else
+            stop = false;            
     }
 };
 
+// Displays elements to screen after processing them.
 var display = function() {
     // Remove click-to-movability from previously added element.
     $('#zyoa').children().last().removeClass('move');
@@ -88,23 +110,30 @@ var display = function() {
     $('#zyoa').children().last().addClass("move");
 };
 
-var evaluate = function() {
-    if (node.tag() == 'SCRIPT') {
-        // Yes, I know, "the `Function` constructor is `eval`, and therefore, _evil_." Deal with it.
-        var temporary_function = new Function(node.html());
-        temporary_function();
-    } else {
-        if (node.hasClass("aside"))
-            move();
-        else
-            display();
-        if (node.hasClass("interactive"))
-            interactive = true;
-        else
-            interactive = false;            
+// Remove links that can only be clicked once.
+$('#zyoa').find('a').live("click", function() { 
+    if ($(this).hasClass('once'))
+        $(this).contents().unwrap();
+});
+
+
+
+// ### These are the exposed functions for controlling story progression.
+
+// Jumps to the specified `id`, if possible, though.
+var jump = function(id) {
+    node = $(id);
+    if (down()) {
+        display();
+        done = false;
+        return true;    
     }
 };
 
+// Flag to see if the story-tree has finished.
+var done = true;
+
+// Moves to the next story-element.
 var move = function() {
     if (!done) {
         if(iterate())
@@ -114,12 +143,32 @@ var move = function() {
     }
 };
 
-$('.move').live("click", function() { // But live() is supposedly deprecated, what else shall I use as on() doesn't work for future elements?
-    if (!interactive)
-        move();
-});
+// Displays element specified by the `id` as an aside, without moving from the current position in the story.
+var aside = function(id) {
+    return;
+}
 
-$('#zyoa > a').live("click", function() { 
-    if ($(this).hasClass('once'))
-        $(this).contents().unwrap();
-});
+
+
+// ### Make the story progress by click-to-move.
+
+// A flag to know when not to interfere with clicks by moving with the story.
+var stop = false;
+
+// Set up necessary event-handlers to implement click-to-move.
+var clicktomove = function() {
+    // But live() is supposedly deprecated, what else shall I use as on() doesn't work for future elements?
+    // Progress story if any element with class `move` is clicked.
+    $('#zyoa > .move').live("click", function() { 
+        if (!stop)
+            move();
+    });
+    // All `a` elements can be clicked without progressing the story.
+    $('#zyoa > .move').find('a').live("click", function(e) { 
+        e.stopPropagation();
+    });
+    // All other elements would have to be explicitly marked to stop if clickable but should not progress the story.
+    $('#zyoa').find('.stop').live("click", function(e) { 
+        e.stopPropagation();
+    });
+}();

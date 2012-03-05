@@ -25,18 +25,18 @@
 				<section>
 					<p class="transient">1</p>
 					<section>
-						<p class='aside'>2</p>
+						<p class='skip'>2</p>
 						<p>3</p>
                         <script type='text/plaintext'>alert("yo!"); move();</script>
 						<p id='4'>4</p>
 					</section>
 				</section>        
-				<p>5</p>
+				<p>5 This is a <a href='#' onClick="alert('ahem');">of</a> lot text.</p>
 				<p id='6'>6</p>
 			</section>
 			<section>
 				<p>7</p>
-				<p><a href='javascript:jump("#6")' class='once'>8</a> or is it</p>
+				<p><a href='#' onClick="jump('#6');" class='once'>8</a> or is it</p>
 				<p id='9'>9</p>
 			</section>
 		</article>
