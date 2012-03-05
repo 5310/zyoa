@@ -96,7 +96,7 @@ var display = function() {
     // Remove all `a` links, unless designated as permanent.
     $('#zyoa').children().last().find('a:not(.permanent)').contents().unwrap(); //NOTE: If this isn't helping, unoptimize.
     // Hide last element if it's marked as transient.
-    $('#zyoa').find('.transient').hide(); //NOTE: It this is costly, optimize.
+    $('#zyoa').find('.transient').hide(); //NOTE: It this is costly, optimize. Also, set a transition duration.
     // Now to add the current element. But first, let's remove `id`s!
     // Put the raw HTML into a variable for ease of use.
     var data = node.outerHTML();
