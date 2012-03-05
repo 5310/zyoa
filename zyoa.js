@@ -95,23 +95,35 @@ var show_duration = 250;
 
 // Displays elements to screen after processing them.
 var display = function() {
+    
+    // First, alter the previous element as needed.
+    
     // Remove click-to-movability from previously added element.
     $('#zyoa').children().last().removeClass('move');
+    
     // Remove all `a` links, unless designated as permanent.
     $('#zyoa').children().last().find('a:not(.permanent)').contents().unwrap(); //NOTE: If this isn't helping, unoptimize.
+    
     // Hide last element if it's marked as transient.
     $('#zyoa').find('.transient').hide(hide_duration); //NOTE: It this is costly, optimize.
+    
     // Now to add the current element. But first, let's remove `id`s!
+    
     // Put the raw HTML into a variable for ease of use.
     var data = node.outerHTML();
+    
     // Regex is a canine of the female persuation. Useful though.
     var regex = new RegExp("(id=[\"|\']\s*[^\"|^\']*?\s*[\"|\'])", 'g'); //TODO: Make sure matched `id`s are inside angular brackets!
+    
     // Use regex to remove `id`s from the raw HTML.
     data = data.replace(regex, ''); 
+    
     // Then append the cleaned up element.
     $('#zyoa').append(data);
+    
     // Immediately hide the added element, but then reveal it slowly.
     $('#zyoa').children().last().hide().show(show_duration);
+    
     // Don't forget to reapply click-to-movability!
     $('#zyoa').children().last().addClass("move");
 };
