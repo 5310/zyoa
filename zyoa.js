@@ -89,6 +89,10 @@ var evaluate = function() {
     }
 };
 
+// Durations for show-and-hide animation used throughout.
+var hide_duration = 250;
+var show_duration = 250;
+
 // Displays elements to screen after processing them.
 var display = function() {
     // Remove click-to-movability from previously added element.
@@ -96,7 +100,7 @@ var display = function() {
     // Remove all `a` links, unless designated as permanent.
     $('#zyoa').children().last().find('a:not(.permanent)').contents().unwrap(); //NOTE: If this isn't helping, unoptimize.
     // Hide last element if it's marked as transient.
-    $('#zyoa').find('.transient').hide(); //NOTE: It this is costly, optimize. Also, set a transition duration.
+    $('#zyoa').find('.transient').hide(hide_duration); //NOTE: It this is costly, optimize.
     // Now to add the current element. But first, let's remove `id`s!
     // Put the raw HTML into a variable for ease of use.
     var data = node.outerHTML();
@@ -106,6 +110,8 @@ var display = function() {
     data = data.replace(regex, ''); 
     // Then append the cleaned up element.
     $('#zyoa').append(data);
+    // Immediately hide the added element, but then reveal it slowly.
+    $('#zyoa').children().last().hide().show(show_duration);
     // Don't forget to reapply click-to-movability!
     $('#zyoa').children().last().addClass("move");
 };
