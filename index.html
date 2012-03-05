@@ -23,11 +23,11 @@
     		<p>0</p>
 			<section>
 				<section>
-					<p>1</p>
+					<p class="transient">1</p>
 					<section>
-						<p>2</p>
+						<p class='aside'>2</p>
 						<p>3</p>
-                        <script type='text/plaintext'>alert("yo!");</script>
+                        <script type='text/plaintext'>alert("yo!"); move();</script>
 						<p id='4'>4</p>
 					</section>
 				</section>        
@@ -36,9 +36,8 @@
 			</section>
 			<section>
 				<p>7</p>
-				<p>8</p>
+				<p><a href='javascript:jump("#6")' class='once'>8</a> or is it</p>
 				<p id='9'>9</p>
-                <script type='text/plaintext'>jump('#6');</script>
 			</section>
 		</article>
         

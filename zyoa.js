@@ -13,6 +13,8 @@ jQuery.fn.tag = function() {
 
 var node, done = true;
 
+var clicktomove = true, interactive = false;
+
 var down = function() {
     if (node.tag() == 'SECTION' || node.tag() == 'ARTICLE') {
         node = node.children().first();
@@ -67,11 +69,23 @@ var jump = function(id) {
 };
 
 var display = function() {
+    // Remove click-to-movability from previously added element.
+    $('#zyoa').children().last().removeClass('move');
+    // Remove all `a` links, unless designated as permanent.
+    $('#zyoa').children().last().find('a:not(.permanent)').contents().unwrap(); //NOTE: If this isn't helping, unoptimize.
+    // Hide last element if it's marked as transient.
+    $('#zyoa').find('.transient').hide(); //NOTE: It this is costly, optimize.
+    // Now to add the current element. But first, let's remove `id`s!
+    // Put the raw HTML into a variable for ease of use.
     var data = node.outerHTML();
-    var regex = new RegExp("(id=[\"|\']\s*[^\"|^\']*?\s*[\"|\'])", 'g');
-    data = data.replace(regex, '');
+    // Regex is a canine of the female persuation. Useful though.
+    var regex = new RegExp("(id=[\"|\']\s*[^\"|^\']*?\s*[\"|\'])", 'g'); //TODO: Make sure matched `id`s are inside angular brackets!
+    // Use regex to remove `id`s from the raw HTML.
+    data = data.replace(regex, ''); 
+    // Then append the cleaned up element.
     $('#zyoa').append(data);
-    console.log(data);
+    // Don't forget to reapply click-to-movability!
+    $('#zyoa').children().last().addClass("move");
 };
 
 var evaluate = function() {
@@ -80,7 +94,14 @@ var evaluate = function() {
         var temporary_function = new Function(node.html());
         temporary_function();
     } else {
-        display();
+        if (node.hasClass("aside"))
+            move();
+        else
+            display();
+        if (node.hasClass("interactive"))
+            interactive = true;
+        else
+            interactive = false;            
     }
 };
 
@@ -93,6 +114,12 @@ var move = function() {
     }
 };
 
-$(document).click(function() {
-    move();
+$('.move').live("click", function() { // But live() is supposedly deprecated, what else shall I use as on() doesn't work for future elements?
+    if (!interactive)
+        move();
+});
+
+$('#zyoa > a').live("click", function() { 
+    if ($(this).hasClass('once'))
+        $(this).contents().unwrap();
 });
