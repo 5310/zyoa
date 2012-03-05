@@ -1,8 +1,59 @@
 Zen Your Own Adventure
 ======================
 
-ZYOA is a simple little framework for writing branching-narratives in HTML...and some optional Javscript for in-game logic, and CSS for style; since even zen-monks believe in the bare essentials and nothing less.
 
-The framework is nothing but a bunch of Javascript routines that allow for a specially written (but nothing arcane) `article` to "play-back" its contents following a regular manner; jump from one point of the story to another; and then some more to allow for the "branching" bits of branching-narratives. And it also allows for arbitrary chunks of Javascript to be included and run in due course, which allows for a rather large variety of effects, but all to the writer's discretion.
 
-In short, ZYOA aims to do the littlest possible bit of automation to make writing web-based branching-narratives as simple as it should be...but maybe not _simpler_, which sounds like a good fall-back excuse to have.
+What is ZYOA?
+-------------
+
+ZYOA is a _simple_ little framework for writing branching-narratives (also known as [gamebooks][]; for example, the Choose Your Own Adventure series) in HTML...and as much or as little Javascript as one desires: Both the source story and the resulting reading is plain web-pages, and can do (almost) anything you can do with such things.
+
+The framework itself is nothing but a bunch of Javascript helper-code to allow a specifically written (nothing arcane or complex) HTML `article` to _play-back_ its contents. It does so by going through the `article` in a predictable tree-like manner -- since all HTML code is a tree anyway -- where all the "leaves" are elements of the story, and printing them to the screen. Special functions also make jumping from one part of the tree to another, making the "branching" bit branching-narratives possible. 
+
+If it sounds complicated, it's only because you haven't emptied your mind sufficiently, grasshopper. Take, for example, the simple `article`:
+
+    <article>
+        <p>This is the first line of a story.</p>
+        <p>Then this must be the <em>thrilling</em> climax.</p>
+        <p>Because this is the end.</p>
+    <article>
+    
+This simple little story would play out one after another upon each click. But some hop skip and jump would make it a lot more interesting:
+
+    <article>
+        <p id='start'>This is the first line of a story.</p>
+        <p>Then this must be the <em>thrilling</em> climax.</p>
+        <p class='stop'>You liked it, right? <a href="#" onClick="jump('yes');">Yes?</a> <a href="#" onClick="jump('yes');">No?</a></p>
+        <p id='yes' class='stop'>Good, good. <a href="#" onClick="jump('start');">Come back any time</a>.</p>
+        <p id='no'>Well! I guess you will be rushing to the library, then.</p>
+    <article>
+    
+Don't let the sudden lengthening dissuade you, things are just getting...exciting.
+
+Now, once the reader reaches the point of decision, the story would not progress automatically on clicking; the reader would have to make a choice. 
+
+If the reader chooses "yes" he will get to read the story all over again after the next link. If the reader had chosen "no", the game would jump to that point, and end. Naturally, the `id`s identify elements for jumping around. And the `class`es alter the flow of the story: It wouldn't do if the reader could click anywhere during the moment of choice, and break our plot, would it?
+
+Of course, there's more to ZYOA. But it's still pretty _simple,_ really, as simple as necessary, but maybe not simpler...which sounds like a good excuse to have.
+
+
+
+Can I see for myself, please?
+-----------------------------
+
+Why, of course. Direct yourself to the [demo][] while I meditate.
+
+
+
+How do I go about writing stories-- er... "branching-narratives" with ZYOA?
+---------------------------------------------------------------------------
+
+I'm glad you asked. This could take a while. Why not have some momos while I get the study-material ready? 
+
+Or you could go through the [source][] for the demo should you wish.
+
+
+
+[gamebooks]:    http://en.wikipedia.org/wiki/Gamebook   "The Wikipedia article for gamebooks."
+[demo]:         #                                       "A demo story written using ZYOA."
+[source]:       #                                       "Source for the demo story."
