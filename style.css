@@ -1,0 +1,137 @@
+@import url("reset.css");
+
+@import url("http://fonts.googleapis.com/css?family=Kranky");
+
+
+
+body {
+	background-image:url('texture.png');
+	font-family: sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: #6C2E00;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #482D11;
+}
+
+
+
+header {
+	position: absolute;
+	width: 250px;
+	top: 0px;
+	bottom: 0px;
+	padding: 50px;
+	padding-right: 0;
+	text-shadow: #bbb 0px 3px 1px;
+}
+
+header h1 {
+	font-family: 'Kranky', serif;
+	font-size: 48px;
+}
+
+header h1 a:hover {
+	text-decoration: none;
+}
+
+header p {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	font-size: 16px;
+	text-shadow: #bbb 0px 1px 1px;
+}
+
+header #begindemo {
+	font-family: 'Kranky', serif;
+	font-size: 24px;
+}
+
+header #resetdemo {
+	display: none;
+	font-family: 'Kranky', serif;
+	font-size: 24px;
+}
+
+
+
+footer {
+	position: absolute;
+	width: 250px;
+	bottom: 0px;
+	padding: 50px;
+	padding-right: 0;
+	text-shadow: #bbb 0px 3px 1px;
+}
+
+footer p {
+	font-size: 16px;
+	text-shadow: #bbb 0px 1px 1px;
+}
+
+
+#zyoa {
+	position: absolute;
+	
+	opacity: 0;
+	
+	left: 300px;
+	right: 0;
+	
+	max-width: 500px;
+	min-height: 82%;
+	
+	margin: 50px;
+	padding: 20px;
+	
+	background: #EEE;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+	-moz-box-shadow:    0px 0px 3px 3px #f3f3f3;
+	-webkit-box-shadow: 0px 0px 3px 3px #f3f3f3;
+	box-shadow:         0px 0px 3px 3px #f3f3f3;
+	
+	color: #333;
+}
+
+#zyoa:hover {
+	border: 1px solid #CCC;
+}
+
+#zyoa > * {
+	padding: 0.5em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#zyoa .move {
+	cursor:hand;
+}
+
+#zyoa > *.move:hover:not(.end) {
+	background: #F9F9F9;
+}
+
+#zyoa .end {
+	padding-bottom: 1em;
+	border-bottom: 1px solid #DDD;
+}
+
+#zyoa a {
+	margin: -2px;
+	padding: 2px;
+	background: #F9F9F9;
+	color: inherit;
+}

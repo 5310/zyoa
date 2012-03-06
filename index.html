@@ -16,11 +16,18 @@
     </head>
     
     <body>
+	
+	<header>
+	    <h1>Zen<br/>Your<br/>Own<br/>Adventure</h1>
+	    <p>ZYOA is a <em>simple</em> little framework for writing branching-narratives (also known as <a href="http://en.wikipedia.org/wiki/Gamebook">gamebooks</a>) in HTML, a little css, and as much Javascript as one desires.</p>
+	    <div id="begindemo"><a href="#" onClick="begindemo();">To begin the demo, click here.</a></div>
+	    <div id="resetdemo"><a href="#" onClick="resetdemo();">Restart the demo?</a></div>
+	</header>
     
         <div id='zyoa'></div>
             
         <article id='story' style='display: none !important;'>
-    		<p>0</p>
+    		<p>Click here to continue.</p>
 			<section>
 				<section>
 					<p class="transient">1</p>
@@ -34,18 +41,33 @@
 				<p>5 This is a <a href='#' onClick="alert('ahem');">of</a> lot text.</p>
 				<p id='6'>6</p>
 			</section>
+			<div>
+			    <p>This is more.</p>
+			</div>
 			<section>
 				<p>7</p>
 				<p><a href='#' onClick="jump('#6');" class='once'>8</a> or is it</p>
-				<p id='9'>9</p>
+				<p id='9' class="end">9</p>
 			</section>
 		</article>
         
         <script type='text/javascript'>
-            $(document).ready(function() {
-                jump('#story');
-            });
+	    
+	    var begindemo = function() {
+		$('#zyoa').animate({opacity: '1',}, 500);
+		$('#begindemo').hide();
+		$('#resetdemo').show();
+		jump('#story');
+	    };
+	    var resetdemo = function() {
+		$('#zyoa').empty();
+		jump('#story');
+	    };
         </script>
+	
+	<footer>
+	    <p>Learn more <a href="https://github.com/5310/zyoa#readme">here</a>.</p>
+	</footer>
     
     </body>
 

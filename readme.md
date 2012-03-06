@@ -6,9 +6,9 @@ Zen Your Own Adventure
 What is ZYOA?
 -------------
 
-ZYOA is a _simple_ little framework for writing branching-narratives (also known as [gamebooks][]; for example, the Choose Your Own Adventure series) in HTML...and as much or as little Javascript as one desires: Both the source story and the resulting reading is plain web-pages, and can do (almost) anything you can do with such things.
+ZYOA is a _simple_ little framework for writing branching-narratives (also known as [gamebooks][]; for example, the Choose Your Own Adventure series) in HTML, a little css, and as much Javascript as one desires.
 
-The framework itself is nothing but a bunch of Javascript helper-code to allow a specifically written (nothing arcane or complex) HTML `article` to _play-back_ its contents. It does so by going through the `article` in a predictable tree-like manner -- since all HTML code is a tree anyway -- where all the "leaves" are elements of the story, and printing them to the screen. Special functions also make jumping from one part of the tree to another, making the "branching" bit branching-narratives possible. 
+The framework itself is nothing but a bunch of Javascript helper-code to allow a specifically written (nothing arcane or complex) HTML `article` to _play-back_ its contents. It does so by going through the `article` in a predictable tree-like manner -- since all HTML code is a tree anyway -- where all the "leaves" are elements of the story, and printing them to the screen. Special functions also make jumping from one part of the tree to another, making the "branching" bit in branching-narrative possible. 
 
 If it sounds complicated, it's only because you haven't emptied your mind sufficiently, grasshopper. Take, for example, the simple `article`:
 
@@ -50,10 +50,10 @@ How do I go about writing stories-- er... "branching-narratives" with ZYOA?
 
 I'm glad you asked. This could take a while. Why not have some momos while I get the study-material ready? 
 
-Or you could go through the [source][] for the demo should you wish.
+Or you could go through the [source][] for the demo should you wish, although it might use do a few custom things which could get in the way.
 
 
 
-[gamebooks]:    http://en.wikipedia.org/wiki/Gamebook   "The Wikipedia article for gamebooks."
-[demo]:         #                                       "A demo story written using ZYOA."
-[source]:       #                                       "Source for the demo story."
+[gamebooks]:    http://en.wikipedia.org/wiki/Gamebook                   "The Wikipedia article for gamebooks."
+[demo]:         http://5310.github.com/zyoa/                            "A demo story written using ZYOA."
+[source]:       https://github.com/5310/zyoa/blob/master/index.html     "Source for the demo story."
