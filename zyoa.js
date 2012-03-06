@@ -19,13 +19,18 @@ jQuery.fn.tag = function() {
 
 // The active node inside the tree. Always a leaf.
 var node;
+var donotskip;
 
 // Moves to the bottom-most node, traversing through `section` elements. 
 // All else is considered leaves.
 var down = function() {
     if (node.tag() == 'SECTION' || node.tag() == 'ARTICLE') {
-        node = node.children().first();
-        down();
+        if (node.hasClass('skip') && !donotskip) {
+            next();
+        } else {
+            node = node.children().first();
+            down();
+        }
     }
     if (node === undefined) {
         return false;
@@ -78,7 +83,7 @@ var evaluate = function() {
         var temporary_function = new Function(node.html());
         temporary_function();
     } else {
-        if (node.hasClass("skip"))
+        if (node.hasClass("skip") && !donotskip)
             move();
         else
             display();
@@ -146,7 +151,7 @@ var display = function() {
     scroll();
     
     // Don't forget to re-apply click-to-movability!
-    if (doclicktomove)
+    if (!node.hasClass('stop'))
         $('#zyoa').children().last().addClass("move");
 };
 
@@ -165,18 +170,22 @@ $('#zyoa').find('a').live("click", function() {
 // Jumps to the specified `id`, if possible, though.
 var jump = function(id) {
     node = $(id);
+    // Don't skip!
+    donotskip = true;
     if (down()) {
-        display();
+        evaluate();
         done = false;
         return true;    
     }
 };
 
 // Flag to see if the story-tree has finished.
-var done = true;
+var done = false;
 
 // Moves to the next story-element.
 var move = function() {
+    // Do skip if directed!
+    donotskip = false;
     if (!done) {
         if(iterate())
             evaluate();
@@ -187,12 +196,16 @@ var move = function() {
 
 // Displays element specified by the `id` as an aside, without moving from the current position in the story.
 var aside = function(id) {
+    // Don't skip!
+    donotskip = true;
     // Remember previous state, as relevant.
     var temp_node = node;
-    // Make the jump.
+    // Make the jump manually.
     node = $(id);
-    if (down())
-        write();   
+    if (down()) {
+        write(); 
+        //scroll(); // Since the asides aren't clickable by default, this makes more sense.
+    }  
     // Then restore previous state.
     node = temp_node;
 }
@@ -202,16 +215,19 @@ var aside = function(id) {
 // ### Make the story progress by click-to-move.
 
 // A global flag to know when to automatically add `.move` to elements.
-var doclicktomove = true;
+var doclicktomove;
 // A flag to know when not to interfere with clicks by moving with the story.
-var stop = false;
+var stop;
 
 // Set up necessary event-handlers to implement click-to-move.
 var clicktomove = function() {
+    // Set flags.
+    doclicktomove = true
+    stop = false
     // But live() is supposedly deprecated, what else shall I use as on() doesn't work for future elements?
     // Progress story if any element with class `move` is clicked.
     $('#zyoa > .move').live("click", function() { 
-        if (!stop)
+        if (doclicktomove && !stop)
             move();
     });
     // All `a` elements can be clicked without progressing the story.
@@ -233,6 +249,7 @@ var toggle_clicktomove = function() {
 // ### The actual start function.
 
 var start = function(story_id, clicktomove_flag) { // And a book_id for later. 
+    done = false;
     if (clicktomove_flag === false)
         toggle_clicktomove();
 	jump(story_id);

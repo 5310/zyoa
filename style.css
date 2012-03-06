@@ -9,6 +9,14 @@ body {
 	font-family: sans-serif;
 }
 
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: bold;
+}
+
 a {
 	text-decoration: none;
 	color: #6C2E00;
@@ -20,6 +28,11 @@ a:hover {
 
 a:visited {
 	color: #482D11;
+}
+
+h1 {
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 
@@ -121,11 +134,15 @@ footer p {
 	border: 1px solid #CCC;
 }
 
-#zyoa > * {
-	padding: 0.5em;
+#zyoa p, h1 {
+	padding: 10px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+}
+
+#zyoa h1 {
+	padding-bottom: 0.5em;
 }
 
 #zyoa .move {
@@ -142,8 +159,19 @@ footer p {
 }
 
 #zyoa a {
-	margin: -2px;
-	padding: 2px;
+	margin-left: -2px;
+	margin-right: -2px;
+	padding-left: 2px;
+	padding-right: 2px;
 	background: #F9F9F9;
 	color: inherit;
+}
+
+#zyoa table {
+	width: 100#;
+}
+
+.sound {
+	font-family: 'Kranky', serif;
+	font-size: 1.2em;
 }

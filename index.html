@@ -26,12 +26,13 @@
 	</header>
     
         <div id='zyoa'></div>
-            
+        
+	<!--    
         <article id='story' style='display: none !important;'>
     		<p>Click here to continue.</p>
 			<section>
 				<section>
-					<p class="transient">1</p>
+					<p class="transient" id="beginning">1</p>
 					<section>
 						<p class='skip'>2</p>
 						<p>3</p>
@@ -46,23 +47,69 @@
 			    <p>This is more.</p>
 			</div>
 			<section>
-				<p>7</p>
+				<p onClick="jump('#beginning');">7</p>
 				<p><a href='#' onClick="jump('#6');" class='once'>8</a> or is it</p>
-				<p id='9' class="end">9</p>
+				<p id='9' class="end" =>9</p>
 			</section>
-		</article>
+	</article>
+	-->
         
+	<article id='grasshopper' style='display: none !important;'>
+	    <section id='title'>
+		<div>
+		    <h1>Welcome to the Zen-Garden of Destiny!</h1>
+		    <p class='transient'>Click here to continue.</p>
+		    </div>
+		<p>(Which is just a fancy way of saying "welcome to the ZYOA demo.")</p>
+	    </section>
+	    <section id='intro'>
+		<p>I will be your <a href="#" onClick="aside('#narrator');" class="once">master</a> this afternoon.</p>
+		<p class='skip' id='narrator'>Oh, did I say <em>master</em>? I mean <em>narr-a-tor</em>, of course.</p>
+		<p>Within this rather sparse and pointless little distraction I hope to introduce you to what <a href="#" onClick="aside('#tool');" class="once">ZYOA can do</a>.</p>
+		<p class='skip' id='tool'>I mean help <em>you</em> do. ZYOA is just a tool, after all; let's not get ahead of ourself. Ha ha. :cough:</p>
+	    </section>
+	    <section id='gong'>
+		<p>Feel free to <a href="#" onClick="aside('#gong_sound')" class='permanent'>hit this gong</a> any time.</p>
+		<p class='skip sound' id='gong_sound'>GOOOONGNGNGNGNGNGNGNG~</p>
+	    </section>
+	    <section id='question'>
+		<p>And now, before we begin, I have an important question that only <em>you</em> may answer.</p>
+		<p>Are you a grasshopper?</p>
+		<div class='stop transient'>
+		    <p><a href="#" onClick="jump('#grasshopper_yes');">Yes.</a></p>
+		    <p><a href="#" onClick="jump('#grasshopper_no');">No!</a></p>
+		</div>
+		<section id='grasshopper_yes' class='skip'>
+		    <p onClick="jump('#end');">Yes, good.</p>
+		</section>
+		<section id='grasshopper_no' class='skip'>
+		    <p onClick="jump('#end');">No? Excellent!</p>
+		</section>
+	    </section>
+	    <section id='end'>
+		<script type='text/plaintext'>
+		    var d = new Date();
+		    if (d.getHours() < 12)
+			jump('#am');
+		    else
+			jump('#pm');
+		</script>
+		<p class='skip' id='pm'>It is currently post meridiem.</p>
+		<p class='skip' id='am'>It is still too early in the day.</p>
+		<p class='end'>That would be all. Good bye.</p>
+	    </section>
+	</article>
+	
         <script type='text/javascript'>
 	    
 	    var begindemo = function() {
 		$('#zyoa').animate({opacity: '1',}, 500);
 		$('#begindemo').hide();
 		$('#resetdemo').show();
-		start('#story');
+		start('#grasshopper');
 	    };
 	    var resetdemo = function() {
-		$('#zyoa').empty();
-		start('#story');
+		window.location.reload();
 	    };
         </script>
     
