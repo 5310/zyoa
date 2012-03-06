@@ -124,8 +124,9 @@ var display = function() {
     // Immediately hide the added element, but then reveal it slowly.
     $('#zyoa').children().last().hide().show(show_duration);
     
-    // Don't forget to reapply click-to-movability!
-    $('#zyoa').children().last().addClass("move");
+    // Don't forget to re-apply click-to-movability!
+    if (doclicktomove)
+        $('#zyoa').children().last().addClass("move");
 };
 
 // Remove links that can only be clicked once.
@@ -170,6 +171,8 @@ var aside = function(id) {
 
 // ### Make the story progress by click-to-move.
 
+// A global flag to know when to automatically add `.move` to elements.
+var doclicktomove = true;
 // A flag to know when not to interfere with clicks by moving with the story.
 var stop = false;
 
@@ -190,3 +193,17 @@ var clicktomove = function() {
         e.stopPropagation();
     });
 }();
+
+// Toggles click-to-move.
+var toggle_clicktomove = function() {
+    doclicktomove = !doclicktomove;
+}
+
+
+// ### The actual start function.
+
+var start = function(story_id, clicktomove_flag) { // And a book_id for later. 
+    if (clicktomove_flag === false)
+        toggle_clicktomove();
+	jump(story_id);
+}
