@@ -93,22 +93,8 @@ var evaluate = function() {
 var hide_duration = 250;
 var show_duration = 250;
 
-// Displays elements to screen after processing them.
-var display = function() {
-    
-    // First, alter the previous element as needed.
-    
-    // Remove click-to-movability from previously added element.
-    $('#zyoa').children().last().removeClass('move');
-    
-    // Remove all `a` links, unless designated as permanent.
-    $('#zyoa').children().last().find('a:not(.permanent)').contents().unwrap(); //NOTE: If this isn't helping, unoptimize.
-    
-    // Hide last element if it's marked as transient.
-    $('#zyoa').find('.transient').hide(hide_duration); //NOTE: It this is costly, optimize.
-    
-    // Now to add the current element. But first, let's remove `id`s!
-    
+// Only processes and draws elements.
+var write = function() {    
     // Put the raw HTML into a variable for ease of use.
     var data = node.outerHTML();
     
@@ -123,6 +109,24 @@ var display = function() {
     
     // Immediately hide the added element, but then reveal it slowly.
     $('#zyoa').children().last().hide().show(show_duration);
+}
+
+// Writes elements to screen after processing them.
+var display = function() {
+    
+    // First, alter the previous element as needed.
+    
+    // Remove click-to-movability from previously added element.
+    $('#zyoa').children().removeClass('move');
+    
+    // Remove all `a` links, unless designated as permanent.
+    $('#zyoa').children().find('a:not(.permanent)').contents().unwrap(); //NOTE: If this isn't helping, unoptimize.
+    
+    // Hide last element if it's marked as transient.
+    $('#zyoa').find('.transient').hide(hide_duration); //NOTE: It this is costly, optimize.
+    
+    // Now to add the current element!
+    write();
     
     // Don't forget to re-apply click-to-movability!
     if (doclicktomove)
@@ -164,7 +168,14 @@ var move = function() {
 
 // Displays element specified by the `id` as an aside, without moving from the current position in the story.
 var aside = function(id) {
-    return;
+    // Remember previous state, as relevant.
+    var temp_node = node;
+    // Make the jump.
+    node = $(id);
+    if (down())
+        write();   
+    // Then restore previous state.
+    node = temp_node;
 }
 
 
