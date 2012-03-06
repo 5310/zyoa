@@ -49,6 +49,7 @@ header {
 header h1 {
 	font-family: 'Kranky', serif;
 	font-size: 48px;
+	padding: 0;
 }
 
 header h1 a:hover {
