@@ -99,17 +99,31 @@ var write = function() {
     var data = node.outerHTML();
     
     // Regex is a canine of the female persuation. Useful though.
-    var regex = new RegExp("(id=[\"|\']\s*[^\"|^\']*?\s*[\"|\'])", 'g'); //TODO: Make sure matched `id`s are inside angular brackets!
+    // Matches `id` attributes.
+    var re_id = new RegExp("(id=[\"|\']\s*[^\"|^\']*?\s*[\"|\'])", 'g'); //TODO: Make sure matched `id`s are inside angular brackets!
     
-    // Use regex to remove `id`s from the raw HTML.
-    data = data.replace(regex, ''); 
+    // Use format string by the regexes above.
+    data = data.replace(re_id, ''); 
     
     // Then append the cleaned up element.
     $('#zyoa').append(data);
     
     // Immediately hide the added element, but then reveal it slowly.
     $('#zyoa').children().last().hide().show(show_duration);
-}
+};
+
+// Scrolls to the newest element.
+var scroll = function(selector) {
+    var top = $('#zyoa').children().last().offset().top-50;
+    if ($('#zyoa').children().eq(-2).hasClass('transient'))
+        top = $('#zyoa').children().eq(-2).offset().top-50;
+    
+    if(!$('#zyoa').children().last().hasClass('donotscroll')) {
+        $('html, body').animate({
+            scrollTop: top
+        }, 250);
+    }
+};
 
 // Writes elements to screen after processing them.
 var display = function() {
@@ -142,18 +156,7 @@ $('#zyoa').find('a').live("click", function() {
         $(this).contents().unwrap();
 });
 
-// Scrolls to the newest element.
-var scroll = function(selector) {
-    var top = $('#zyoa').children().last().offset().top-50;
-    if ($('#zyoa').children().eq(-2).hasClass('transient'))
-        top = $('#zyoa').children().eq(-2).offset().top-50;
-    
-    if(!$('#zyoa').children().last().hasClass('donotscroll')) {
-        $('html, body').animate({
-            scrollTop: top
-        }, 250);
-    }
-}
+
 
 
 
