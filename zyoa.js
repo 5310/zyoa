@@ -144,9 +144,9 @@ $('#zyoa').find('a').live("click", function() {
 
 // Scrolls to the newest element.
 var scroll = function(selector) {
-    var top = $('#zyoa').children().last().offset().top;;
+    var top = $('#zyoa').children().last().offset().top-50;
     if ($('#zyoa').children().eq(-2).hasClass('transient'))
-        top = $('#zyoa').children().eq(-2).offset().top;
+        top = $('#zyoa').children().eq(-2).offset().top-50;
     
     if(!$('#zyoa').children().last().hasClass('donotscroll')) {
         $('html, body').animate({

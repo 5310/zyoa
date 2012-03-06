@@ -28,7 +28,6 @@ header {
 	position: absolute;
 	width: 250px;
 	top: 0px;
-	bottom: 0px;
 	padding: 50px;
 	padding-right: 0;
 	text-shadow: #bbb 0px 3px 1px;
@@ -107,8 +106,6 @@ footer p {
 	box-shadow:         0px 0px 3px 3px #f3f3f3;
 	
 	color: #333;
-	
-	font-size: 5em;
 }
 
 #zyoa:after {
