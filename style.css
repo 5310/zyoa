@@ -61,6 +61,10 @@ header #resetdemo {
 	font-size: 24px;
 }
 
+header #foot {
+	position: relative;
+	bottom: 0;
+}
 
 
 footer {
