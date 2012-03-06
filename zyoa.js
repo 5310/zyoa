@@ -128,6 +128,9 @@ var display = function() {
     // Now to add the current element!
     write();
     
+    // And scroll to it.
+    scroll();
+    
     // Don't forget to re-apply click-to-movability!
     if (doclicktomove)
         $('#zyoa').children().last().addClass("move");
@@ -138,6 +141,19 @@ $('#zyoa').find('a').live("click", function() {
     if ($(this).hasClass('once'))
         $(this).contents().unwrap();
 });
+
+// Scrolls to the newest element.
+var scroll = function(selector) {
+    var top = $('#zyoa').children().last().offset().top;;
+    if ($('#zyoa').children().eq(-2).hasClass('transient'))
+        top = $('#zyoa').children().eq(-2).offset().top;
+    
+    if(!$('#zyoa').children().last().hasClass('donotscroll')) {
+        $('html, body').animate({
+            scrollTop: top
+        }, 250);
+    }
+}
 
 
 
