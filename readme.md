@@ -12,7 +12,7 @@ The framework itself is nothing but a bunch of Javascript helper-code to allow a
 
 If it sounds complicated, it's only because you haven't emptied your mind sufficiently, grasshopper. Take, for example, the simple `article`:
 
-    <article>
+    <article id='test-story'>
         <p>This is the first line of a story.</p>
         <p>Then this must be the <em>thrilling</em> climax.</p>
         <p>Because this is the end.</p>
@@ -20,11 +20,11 @@ If it sounds complicated, it's only because you haven't emptied your mind suffic
     
 This simple little story would play out one after another upon each click. But some hop skip and jump would make it a lot more interesting:
 
-    <article>
+    <article id='test-story'>
         <p id='start'>This is the first line of a story.</p>
         <p>Then this must be the <em>thrilling</em> climax.</p>
-        <p class='stop'>You liked it, right? <a href="#" onClick="jump('yes');">Yes?</a> <a href="#" onClick="jump('yes');">No?</a></p>
-        <p id='yes' class='stop'>Good, good. <a href="#" onClick="jump('start');">Come back any time</a>.</p>
+        <p class='stop'>You liked it, right? <a href="#" onClick="jump('#yes');">Yes?</a> <a href="#" onClick="jump('#no');">No?</a></p>
+        <p id='yes' class='stop'>Good, good. <a href="#" onClick="jump('#start');">Come back any time</a>.</p>
         <p id='no'>Well! I guess you will be rushing to the library, then.</p>
     <article>
     
