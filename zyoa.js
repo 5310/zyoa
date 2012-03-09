@@ -204,7 +204,7 @@ var aside = function(id) {
     node = $(id);
     if (down()) {
         write(); 
-        //scroll(); // Since the asides aren't clickable by default, this makes more sense.
+        scroll();
     }  
     // Then restore previous state.
     node = temp_node;
