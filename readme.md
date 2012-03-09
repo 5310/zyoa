@@ -52,8 +52,11 @@ I'm glad you asked. This could take a while. Why not have some momos while I get
 
 Or you could go through the [source][] for the demo should you wish, although it might use do a few custom things which could get in the way.
 
+**There's also a template [jsFiddle][] for quickly getting started writing ZYOA stories.**
+
 
 
 [gamebooks]:    http://en.wikipedia.org/wiki/Gamebook                   "The Wikipedia article for gamebooks."
 [demo]:         http://5310.github.com/zyoa/                            "A demo story written using ZYOA."
 [source]:       https://github.com/5310/zyoa/blob/master/index.html     "Source for the demo story."
+[jsFiddle]:     http://jsfiddle.net/Scio/9H8Tf/                         "ZYOA Template jsFiddle."
