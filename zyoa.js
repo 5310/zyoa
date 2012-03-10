@@ -153,6 +153,9 @@ var display = function() {
     // Don't forget to re-apply click-to-movability!
     if (!node.hasClass('stop'))
         $('#zyoa').children().last().addClass("move");
+        
+    // And then remove any skipped elements if they were added via `div`s.
+    $('#zyoa').children().last().find(".skip").remove();
 };
 
 // Remove links that can only be clicked once.
