@@ -59,4 +59,4 @@ Or you could go through the [source][] for the demo should you wish, although it
 [gamebooks]:    http://en.wikipedia.org/wiki/Gamebook                   "The Wikipedia article for gamebooks."
 [demo]:         http://5310.github.com/zyoa/                            "A demo story written using ZYOA."
 [source]:       https://github.com/5310/zyoa/blob/master/index.html     "Source for the demo story."
-[jsFiddle]:     http://jsfiddle.net/Scio/9H8Tf/                         "ZYOA Template jsFiddle."
+[jsFiddle]:     http://jsfiddle.net/nBCA8/                              "ZYOA Template jsFiddle."
